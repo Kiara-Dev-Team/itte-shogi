@@ -288,11 +288,13 @@ def demo_programmatic_usage():
         board = Board()
         
         # Place pieces manually
+        # Note: File 1 is rightmost (1筋), File 9 is leftmost (9筋)
+        # Rank 1 is top row (一段), Rank 9 is bottom row (九段)
         print("Setting up a corner mate position...")
-        board.set_piece(1, 1, -PieceType.KING)  # Gote king at 1-1
-        board.set_piece(2, 1, -PieceType.GOLD)  # Gote gold at 2-1
-        board.set_piece(1, 2, -PieceType.GOLD)  # Gote gold at 1-2
-        board.set_piece(5, 9, PieceType.KING)   # Sente king at 5-9
+        board.set_piece(1, 1, -PieceType.KING)  # Gote king at 1a (corner)
+        board.set_piece(2, 1, -PieceType.GOLD)  # Gote gold at 2a (blocking escape)
+        board.set_piece(1, 2, -PieceType.GOLD)  # Gote gold at 1b (blocking escape)
+        board.set_piece(5, 9, PieceType.KING)   # Sente king at 5i (safe position)
         
         # Add piece to Sente's hand
         board.hand_sente[PieceType.GOLD] = 1

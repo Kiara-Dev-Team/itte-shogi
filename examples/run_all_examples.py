@@ -159,37 +159,33 @@ def demonstrate_api_usage():
     
     print("Demonstrating direct API usage in Python:\n")
     
-    code = '''
-from shogi_mate1.core.board import Board
-from shogi_mate1.solver.mate1 import verify_mate_position
-
-# Create a board from SFEN
-sfen = "8k/9/8G/9/9/9/9/9/K8 b - 1"
-print(f"Testing position: {sfen}\\n")
-
-board = Board.from_sfen(sfen)
-
-# Display the board
-print("Board visualization:")
-print(board)
-print()
-
-# Verify the position
-result = verify_mate_position(board)
-print(f"Is mate-in-1: {result['is_mate']}")
-print(f"Unique solution: {result['is_unique']}")
-print(f"Mate moves found: {result['mate_count']}")
-
-if result['mate_moves']:
-    print("\\nMate move(s):")
-    for move in result['mate_moves']:
-        print(f"  {move}")
-
-print("\\n✓ API usage demonstration complete")
-'''
-    
     try:
-        exec(code)
+        from shogi_mate1.core.board import Board
+        from shogi_mate1.solver.mate1 import verify_mate_position
+        
+        # Create a board from SFEN
+        sfen = "8k/9/8G/9/9/9/9/9/K8 b - 1"
+        print(f"Testing position: {sfen}\n")
+        
+        board = Board.from_sfen(sfen)
+        
+        # Display the board
+        print("Board visualization:")
+        print(board)
+        print()
+        
+        # Verify the position
+        result = verify_mate_position(board)
+        print(f"Is mate-in-1: {result['is_mate']}")
+        print(f"Unique solution: {result['is_unique']}")
+        print(f"Mate moves found: {result['mate_count']}")
+        
+        if result['mate_moves']:
+            print("\nMate moves:")
+            for move in result['mate_moves']:
+                print(f"  {move}")
+        
+        print("\n✓ API usage demonstration complete")
         print()
         return True
     except Exception as e:
