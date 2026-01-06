@@ -68,6 +68,7 @@ def check_python_module():
     
     try:
         import shogi_mate1
+        # Use getattr with default to safely handle modules without __version__
         version = getattr(shogi_mate1, '__version__', 'unknown')
         print(f"✓ shogi_mate1 module is installed (version {version})")
         return True

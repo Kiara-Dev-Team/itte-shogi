@@ -288,8 +288,11 @@ def demo_programmatic_usage():
         board = Board()
         
         # Place pieces manually
-        # Note: File 1 is rightmost (1筋), File 9 is leftmost (9筋)
-        # Rank 1 is top row (一段), Rank 9 is bottom row (九段)
+        # Board coordinate system:
+        # - Files: 1-9 (1 is rightmost/1筋, 9 is leftmost/9筋) 
+        # - Ranks: 1-9 (1 is top row/一段, 9 is bottom row/九段)
+        # - Example: (1, 1) is top-right corner, (9, 9) is bottom-left corner
+        # See Board.set_piece(file, rank, piece) for the API
         print("Setting up a corner mate position...")
         board.set_piece(1, 1, -PieceType.KING)  # Gote king at 1a (corner)
         board.set_piece(2, 1, -PieceType.GOLD)  # Gote gold at 2a (blocking escape)

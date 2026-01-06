@@ -462,7 +462,7 @@ If you see garbled text instead of Japanese characters:
   cat README.md
   ```
 
-- View examples:
+- View examples README:
   ```bash
   cat examples/README.md
   ```
