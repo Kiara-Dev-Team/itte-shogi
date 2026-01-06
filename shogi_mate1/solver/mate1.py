@@ -7,7 +7,7 @@ This module handles:
 - Checking for unique solution
 """
 
-from typing import List, Optional, Dict
+from typing import Dict, Any, List, Optional
 from dataclasses import dataclass
 from shogi_mate1.core.board import Board
 from shogi_mate1.core.move import Move
@@ -133,7 +133,7 @@ def get_unique_mate(board: Board) -> Optional[Move]:
     return None
 
 
-def verify_mate_position(board: Board) -> Dict[str, any]:
+def verify_mate_position(board: Board) -> Dict[str, Any]:
     """
     Verify a position and return detailed information.
     

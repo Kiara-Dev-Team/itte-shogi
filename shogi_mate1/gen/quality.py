@@ -7,7 +7,7 @@ This module provides:
 - Position evaluation
 """
 
-from typing import Dict
+from typing import Dict, List
 from dataclasses import dataclass
 from shogi_mate1.core.board import Board
 from shogi_mate1.core.movegen import legal_moves, checking_moves
@@ -103,7 +103,7 @@ def is_quality_position(board: Board,
     return True
 
 
-def filter_positions(positions: list[Board], **kwargs) -> list[Board]:
+def filter_positions(positions: List[Board], **kwargs) -> List[Board]:
     """
     Filter positions by quality criteria.
     

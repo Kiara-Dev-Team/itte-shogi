@@ -25,47 +25,52 @@ def create_template_mate_position(template_id: int = 0) -> Board:
     board = Board()
     
     if template_id == 0:
-        # Simple back rank mate
-        # Gote King on 5a with own pieces blocking escape
-        board.set_piece(5, 1, -PieceType.KING)
-        board.set_piece(4, 2, -PieceType.GOLD)
-        board.set_piece(5, 2, -PieceType.PAWN)
-        board.set_piece(6, 2, -PieceType.GOLD)
-        board.set_piece(5, 9, PieceType.KING)
-        board.side_to_move = 1
-        board.hand_sente[PieceType.ROOK] = 1
-        # Mate: Drop Rook on 5b, 5c, 5d, etc.
-    
-    elif template_id == 1:
-        # Edge mate with pieces
-        board.set_piece(1, 1, -PieceType.KING)
-        board.set_piece(2, 1, -PieceType.PAWN)
-        board.set_piece(1, 2, -PieceType.PAWN)
-        board.set_piece(5, 9, PieceType.KING)
-        board.side_to_move = 1
-        board.hand_sente[PieceType.GOLD] = 1
-        # Mate: Drop Gold on 2b
-    
-    elif template_id == 2:
-        # Rook mate with blocking pieces
+        # Rook drop mate - king surrounded by own pieces
         board.set_piece(5, 1, -PieceType.KING)
         board.set_piece(4, 1, -PieceType.SILVER)
         board.set_piece(6, 1, -PieceType.SILVER)
+        board.set_piece(4, 2, -PieceType.PAWN)
         board.set_piece(5, 2, -PieceType.PAWN)
-        board.set_piece(5, 3, PieceType.ROOK)
+        board.set_piece(6, 2, -PieceType.PAWN)
         board.set_piece(5, 9, PieceType.KING)
         board.side_to_move = 1
-        # Mate: Rook from 5c captures pawn on 5b (check and mate)
+        board.hand_sente[PieceType.ROOK] = 1
+        # Mate: R*5c or similar gives mate as king cannot escape
     
-    else:
-        # Default: simple edge mate
-        board.set_piece(9, 1, -PieceType.KING)
-        board.set_piece(8, 1, -PieceType.PAWN)
-        board.set_piece(9, 2, -PieceType.PAWN)
+    elif template_id == 1:
+        # Corner mate with multiple pieces blocking
+        board.set_piece(1, 1, -PieceType.KING)
+        board.set_piece(2, 1, -PieceType.GOLD)
+        board.set_piece(1, 2, -PieceType.GOLD)
+        board.set_piece(2, 2, -PieceType.PAWN)
         board.set_piece(5, 9, PieceType.KING)
         board.side_to_move = 1
         board.hand_sente[PieceType.GOLD] = 1
-        # Mate: Drop Gold on 8b
+        # Mate: G*1c or similar
+    
+    elif template_id == 2:
+        # Rook capture mate
+        board.set_piece(5, 1, -PieceType.KING)
+        board.set_piece(4, 1, -PieceType.GOLD)
+        board.set_piece(6, 1, -PieceType.GOLD)
+        board.set_piece(4, 2, -PieceType.SILVER)
+        board.set_piece(5, 2, -PieceType.PAWN)
+        board.set_piece(6, 2, -PieceType.SILVER)
+        board.set_piece(5, 3, PieceType.ROOK)
+        board.set_piece(5, 9, PieceType.KING)
+        board.side_to_move = 1
+        # Mate: Rook captures pawn on 5b
+    
+    else:
+        # Default: simple back rank mate setup
+        board.set_piece(9, 1, -PieceType.KING)
+        board.set_piece(8, 1, -PieceType.GOLD)
+        board.set_piece(9, 2, -PieceType.GOLD)
+        board.set_piece(8, 2, -PieceType.PAWN)
+        board.set_piece(5, 9, PieceType.KING)
+        board.side_to_move = 1
+        board.hand_sente[PieceType.GOLD] = 1
+        # Mate: G*9c
     
     return board
 

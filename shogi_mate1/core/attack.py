@@ -53,7 +53,7 @@ def is_attacked_by_piece(board: Board, target_sq: int, attacker_sq: int) -> bool
                 continue
             
             # Check if target is in this direction
-            if df * dir_dr == dr * dir_df and (df * dir_df >= 0 or dr * dir_dr >= 0):
+            if df * dir_dr == dr * dir_df and (df * dir_df >= 0 and dr * dir_dr >= 0):
                 # Check if same direction
                 if (df == 0 and dir_df == 0) or (dr == 0 and dir_dr == 0) or \
                    (df != 0 and dir_df != 0 and df * dir_df > 0 and dr * dir_dr > 0):
