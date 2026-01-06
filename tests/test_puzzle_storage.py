@@ -129,25 +129,39 @@ def test_search_puzzles():
             author="Bob",
             tags=["advanced", "template"]
         )
+        storage.save_puzzle(
+            "4k4/9/9/9/9/9/9/9/4K4 b R 1",
+            name="Corner Drop",
+            author="Alice",
+            tags=["beginner", "drop"]
+        )
         
         # Search by name
         results = storage.search_puzzles(query="corner")
-        assert len(results) == 1
-        assert results[0]["name"] == "Corner Mate"
+        assert len(results) == 2
+        assert all("corner" in r["name"].lower() or "corner" in r.get("tags", []) for r in results)
         
         # Search by author
         results = storage.search_puzzles(query="bob")
         assert len(results) == 1
         assert results[0]["author"] == "Bob"
         
-        # Search by tag
+        # Search by tag only
         results = storage.search_puzzles(tags=["beginner"])
-        assert len(results) == 1
-        assert results[0]["name"] == "Corner Mate"
+        assert len(results) == 2
+        assert all("beginner" in r.get("tags", []) for r in results)
+        
+        # Search with both query and tags (AND logic)
+        results = storage.search_puzzles(query="corner", tags=["beginner"])
+        assert len(results) == 2  # Both "Corner Mate" and "Corner Drop" match
+        
+        # Search with query that doesn't match any beginner tags
+        results = storage.search_puzzles(query="template", tags=["beginner"])
+        assert len(results) == 0  # Template Position is advanced, not beginner
         
         # Get all (no filters)
         results = storage.search_puzzles()
-        assert len(results) == 2
+        assert len(results) == 3
 
 
 def test_puzzle_default_name():

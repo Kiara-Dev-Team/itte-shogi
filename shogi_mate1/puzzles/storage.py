@@ -145,28 +145,34 @@ class PuzzleStorage:
             List of matching puzzles
         """
         puzzles = self.load_all_puzzles()
-        results = []
         
+        # If no filters, return all
+        if not query and not tags:
+            return puzzles
+        
+        results = []
         query_lower = query.lower()
         
         for puzzle in puzzles:
-            # Check query match
+            # Check if puzzle matches all provided filters
+            matches = True
+            
+            # Check query match if query is provided
             if query:
-                if (query_lower in puzzle.get('name', '').lower() or
-                    query_lower in puzzle.get('description', '').lower() or
-                    query_lower in puzzle.get('author', '').lower()):
-                    results.append(puzzle)
-                    continue
+                query_match = (query_lower in puzzle.get('name', '').lower() or
+                              query_lower in puzzle.get('description', '').lower() or
+                              query_lower in puzzle.get('author', '').lower())
+                if not query_match:
+                    matches = False
             
-            # Check tag match
-            if tags:
+            # Check tag match if tags are provided
+            if tags and matches:
                 puzzle_tags = puzzle.get('tags', [])
-                if any(tag in puzzle_tags for tag in tags):
-                    results.append(puzzle)
-                    continue
+                tag_match = any(tag in puzzle_tags for tag in tags)
+                if not tag_match:
+                    matches = False
             
-            # If no filters, include all
-            if not query and not tags:
+            if matches:
                 results.append(puzzle)
         
         return results
