@@ -280,7 +280,6 @@ def cmd_list(args):
     return 0
 
 
-
 def main():
     """Main entry point."""
     parser = argparse.ArgumentParser(

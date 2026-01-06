@@ -137,9 +137,12 @@ class PuzzleStorage:
         """
         Search puzzles by name, description, author, or tags.
         
+        When both query and tags are provided, returns puzzles matching both criteria (AND).
+        Within the tags list, matches puzzles with any of the specified tags (OR).
+        
         Args:
-            query: Search query string
-            tags: List of tags to filter by
+            query: Search query string (searches in name, description, author)
+            tags: List of tags to filter by (matches if puzzle has any of these tags)
             
         Returns:
             List of matching puzzles
