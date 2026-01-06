@@ -68,7 +68,8 @@ def check_python_module():
     
     try:
         import shogi_mate1
-        print(f"✓ shogi_mate1 module is installed (version {shogi_mate1.__version__})")
+        version = getattr(shogi_mate1, '__version__', 'unknown')
+        print(f"✓ shogi_mate1 module is installed (version {version})")
         return True
     except ImportError:
         print("✗ shogi_mate1 module is not installed")
