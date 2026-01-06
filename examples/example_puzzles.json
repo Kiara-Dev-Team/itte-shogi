@@ -1,0 +1,18 @@
+[
+  {
+    "sfen": "7gk/7pg/8R/9/9/9/9/9/4K4 b - 1",
+    "name": "Corner Position Example",
+    "description": "Example puzzle showing how to store a position. This is a demonstration position - you should create valid mate-in-1 puzzles.",
+    "author": "Example",
+    "tags": ["example", "corner"],
+    "created_at": "2026-01-06T00:00:00"
+  },
+  {
+    "sfen": "3gkg3/3sps3/4R4/9/9/9/9/9/4K4 b - 1",
+    "name": "Template Position Example",
+    "description": "Example showing a template-based position. Use the verify command to check if your position is a valid mate-in-1.",
+    "author": "Example",
+    "tags": ["example", "template"],
+    "created_at": "2026-01-06T00:00:00"
+  }
+]
