@@ -1,18 +1,42 @@
 [
   {
+    "sfen": "8k/9/7GG/9/9/9/9/9/K8 b - 1",
+    "name": "Corner Mate with Two Golds",
+    "description": "A classic corner mate pattern where the enemy king is trapped by two golds. Multiple mating moves are available by moving either gold to deliver checkmate. This demonstrates a basic mating pattern commonly seen in beginner tsume puzzles.",
+    "author": "Example Collection",
+    "tags": ["beginner", "corner", "gold", "multiple-solutions"],
+    "created_at": "2026-01-06T00:00:00"
+  },
+  {
+    "sfen": "8k/7R1/9/9/9/9/9/9/K8 b - 1",
+    "name": "Simple Back Rank Mate",
+    "description": "A straightforward back rank mate where the rook delivers checkmate by moving along the first rank. This illustrates the power of the rook in creating mating nets on the edge of the board. Good for understanding basic rook mate patterns.",
+    "author": "Example Collection",
+    "tags": ["beginner", "rook", "back-rank"],
+    "created_at": "2026-01-06T00:00:00"
+  },
+  {
     "sfen": "7gk/7pg/8R/9/9/9/9/9/4K4 b - 1",
-    "name": "Corner Position Example",
-    "description": "Example puzzle showing how to store a position. This is a demonstration position - you should create valid mate-in-1 puzzles.",
-    "author": "Example",
-    "tags": ["example", "corner"],
+    "name": "Corner Position with Rook",
+    "description": "An example position showing a corner setup with a rook nearby. The enemy king is protected by gold and pawns. This demonstrates how piece placement affects tactical possibilities. Note: This may not be a valid mate-in-1 - use it as a template for creating your own puzzles.",
+    "author": "Example Collection",
+    "tags": ["intermediate", "corner", "rook"],
+    "created_at": "2026-01-06T00:00:00"
+  },
+  {
+    "sfen": "4k4/9/9/9/9/9/9/9/4K4 b RBG2L 1",
+    "name": "Rich Hand Position",
+    "description": "A position where Sente has many pieces in hand (Rook, Bishop, Gold, 2 Lances) but the enemy king is in the center with room to escape. This demonstrates that having more pieces doesn't always guarantee a quick mate - position matters more than material. Use this to practice calculating escape squares.",
+    "author": "Example Collection",
+    "tags": ["advanced", "hand-pieces", "center-king", "escape-squares"],
     "created_at": "2026-01-06T00:00:00"
   },
   {
     "sfen": "3gkg3/3sps3/4R4/9/9/9/9/9/4K4 b - 1",
-    "name": "Template Position Example",
-    "description": "Example showing a template-based position. Use the verify command to check if your position is a valid mate-in-1.",
-    "author": "Example",
-    "tags": ["example", "template"],
+    "name": "Surrounded King Template",
+    "description": "A template showing a king surrounded by its own pieces (gold-king-gold formation with silver-pawn-silver below). A rook is positioned to potentially deliver mate. This position illustrates the concept of a 'smothered' king where friendly pieces block escape routes. Study this pattern to understand how to trap a king using its own pieces.",
+    "author": "Example Collection",
+    "tags": ["intermediate", "template", "smothered-king", "rook"],
     "created_at": "2026-01-06T00:00:00"
   }
 ]
