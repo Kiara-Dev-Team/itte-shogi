@@ -7,6 +7,7 @@ Pythonで一手詰め将棋を自動生成するシステムのMVP実装です�
 ## 特徴
 
 - 一手詰め将棋問題の自動生成
+- **ユーザー作成パズルのサポート** - 自分のパズルを作成、保存、テスト
 - SFEN形式の完全サポート
 - 複数の生成アルゴリズム（ランダム生成、逆算生成）
 - 詰み判定と唯一解チェック
@@ -35,18 +36,71 @@ python -m shogi_mate1.cli.main generate --method random --n 3 --max-pieces 10
 python -m shogi_mate1.cli.main generate --method reverse --n 5 --seed 42
 ```
 
+### ユーザーパズルの作成
+
+独自の一手詰めパズルを作成して保存できます：
+
+```bash
+# インタラクティブモード - 対話形式で作成
+python -m shogi_mate1.cli.main create
+
+# バッチモード - すべてのパラメータを指定
+python -m shogi_mate1.cli.main create \
+  --sfen "7gk/7pg/8R/9/9/9/9/9/4K4 b - 1" \
+  --name "My Corner Mate" \
+  --description "A mate in the corner" \
+  --author "YourName" \
+  --tags beginner corner \
+  --batch
+
+# 検証失敗でも強制保存（テスト用）
+python -m shogi_mate1.cli.main create \
+  --sfen "YOUR_SFEN_HERE" \
+  --force \
+  --batch
+```
+
+**パズル作成時のバリデーション：**
+- SFEN形式の妥当性チェック
+- 一手詰め判定
+- 唯一解チェック
+- 詰み手の表示
+
+### 保存したパズルのテスト
+
+```bash
+# すべての保存済みパズルをテスト
+python -m shogi_mate1.cli.main test
+
+# 詳細表示付きでテスト
+python -m shogi_mate1.cli.main test --verbose
+
+# 特定のパズルのみテスト（インデックス指定）
+python -m shogi_mate1.cli.main test --index 0
+```
+
+### 保存したパズルの一覧表示
+
+```bash
+# パズル一覧を表示
+python -m shogi_mate1.cli.main list
+
+# SFEN含む詳細情報を表示
+python -m shogi_mate1.cli.main list --verbose
+```
+
 ### 局面の検証
 
 ```bash
 # SFEN形式の局面を検証
-python -m shogi_mate1.cli.main verify --sfen "4k4/3gpg3/9/9/9/9/9/9/4K4 b R 1"
+python -m shogi_mate1.cli.main verify --sfen "7gk/7pg/8R/9/9/9/9/9/4K4 b - 1"
 ```
 
 ### 局面の表示
 
 ```bash
 # SFEN形式の局面を表示
-python -m shogi_mate1.cli.main render --sfen "4k4/9/9/9/9/9/9/9/4K4 b - 1"
+python -m shogi_mate1.cli.main render --sfen "7gk/7pg/8R/9/9/9/9/9/4K4 b - 1"
 ```
 
 ## プロジェクト構造
@@ -66,8 +120,40 @@ shogi_mate1/
 │   ├── random_gen.py  # ランダム生成
 │   ├── reverse_gen.py # 逆算生成
 │   └── quality.py     # 品質評価
+├── puzzles/       # パズル管理モジュール
+│   └── storage.py # パズル保存・読込
 └── cli/           # CLIモジュール
     └── main.py    # コマンドライン処理
+```
+
+## パズルストレージ
+
+作成したパズルは `./puzzles/user_puzzles.json` に JSON 形式で保存されます。
+
+### パズルファイル形式
+
+```json
+{
+  "sfen": "7gk/7pg/8R/9/9/9/9/9/4K4 b - 1",
+  "name": "Corner Mate Example",
+  "description": "A mate in the corner position",
+  "author": "YourName",
+  "tags": ["beginner", "corner"],
+  "created_at": "2026-01-06T00:00:00"
+}
+```
+
+## 例題
+
+`examples/` ディレクトリに例題とSFEN形式の詳しい説明があります：
+
+```bash
+# 例題の使い方を見る
+cat examples/README.md
+
+# 例題をコピーしてテスト
+cp examples/example_puzzles.json puzzles/user_puzzles.json
+python -m shogi_mate1.cli.main test
 ```
 
 ## 開発
@@ -95,4 +181,5 @@ MIT License - 詳細は[LICENSE](LICENSE)を参照
 
 - [設計書](https://github.com/Kiara-Dev-Team/itte-shogi/discussions/1)
 - [SFEN形式](https://web.archive.org/web/20080131070731/http://www.glaurungchess.com/shogi/usi.html)
+- [例題とチュートリアル](examples/README.md)
 
