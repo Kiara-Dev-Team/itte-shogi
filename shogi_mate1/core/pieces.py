@@ -329,8 +329,8 @@ def piece_from_sfen(sfen_char: str) -> Optional[int]:
     if not sfen_char or sfen_char == '.':
         return 0
     
-    is_promoted = sfen_char.startswith('+')
-    if is_promoted:
+    has_plus = sfen_char.startswith('+')
+    if has_plus:
         sfen_char = sfen_char[1:]
     
     is_gote = sfen_char.islower()
@@ -340,7 +340,13 @@ def piece_from_sfen(sfen_char: str) -> Optional[int]:
     for piece_type, sfen in PIECE_SFEN.items():
         base_sfen = sfen.replace('+', '')
         if base_sfen == sfen_upper:
-            piece = piece_type if not is_gote else -piece_type
+            # If input had '+', look for the promoted version
+            if has_plus and not sfen.startswith('+'):
+                # This is a base piece, need promoted version
+                piece = promote(piece_type if not is_gote else -piece_type)
+            else:
+                # Direct match or already promoted piece type
+                piece = piece_type if not is_gote else -piece_type
             return piece
     
     return None

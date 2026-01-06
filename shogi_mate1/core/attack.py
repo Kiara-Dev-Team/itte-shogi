@@ -12,19 +12,12 @@ from shogi_mate1.core.board import Board
 from shogi_mate1.core.pieces import (
     PieceType, get_piece_moves, get_piece_directions, is_sliding_piece
 )
-from shogi_mate1.core.move import square_to_index
+from shogi_mate1.core.move import square_to_index, index_to_file_rank
 
 
 def is_valid_square(file: int, rank: int) -> bool:
     """Check if a square is within board bounds."""
     return 1 <= file <= 9 and 1 <= rank <= 9
-
-
-def index_to_file_rank(index: int) -> tuple[int, int]:
-    """Convert board index to (file, rank)."""
-    rank = (index // 9) + 1
-    file = 9 - (index % 9)
-    return file, rank
 
 
 def is_attacked_by_piece(board: Board, target_sq: int, attacker_sq: int) -> bool:

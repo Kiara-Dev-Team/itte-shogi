@@ -67,6 +67,21 @@ def index_to_square(index: int) -> tuple[str, str]:
     return file_char, rank_char
 
 
+def index_to_file_rank(index: int) -> tuple[int, int]:
+    """
+    Convert board index to (file, rank) tuple.
+    
+    Args:
+        index: Board index (0-80)
+        
+    Returns:
+        Tuple of (file, rank) as integers
+    """
+    rank = (index // 9) + 1
+    file = 9 - (index % 9)
+    return file, rank
+
+
 def square_to_index(file: int, rank: int) -> int:
     """
     Convert file and rank to board index.
